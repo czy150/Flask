@@ -1,0 +1,28 @@
+如果是在 Windows 下，那么导出环境变量的语法取决于使用的是哪种命令行解释器。 在 Command Prompt 下:
+C:\path\to\app>set FLASK_APP=hello.py
+在 PowerShell 下:
+PS C:\path\to\app> $env:FLASK_APP = "hello.py"
+
+这样就启动了一个非常简单的内建的服务器。
+虽然轻便且易于使用，但是Flask的内建服务器不能用于生产，它也不能很好的扩展。此处主要说明在生产环境下正确使用Flask的一些方法。
+如果想要把Flask应用部署到这里没有列出的WSGI服务器，请查询其文档中关于如何使用WSGI的部分，Flask只要记住：应用对象替代是一个WSGI应用。
+
+(lpthw) PS C:\Users\ccc\flask> flask run
+ * Serving Flask app "hello.py"
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+127.0.0.1 - - [26/Oct/2020 21:09:38] "[37mGET / HTTP/1.1[0m" 200 -
+
+外部可见的服务器
+运行服务器后，会发现只有你自己的电脑可以使用服务，而网络中的其他电脑却不行。缺省设置就是这样的，因为在调试模式下该应用的用户可以执行你电脑中的任意 Python 代码。
+如果你关闭了调试器或信任你网络中的用户，那么可以让服务器被公开访问。 只要在命令行上简单的加上 --host=0.0.0.0 即可:
+$ flask run --host=0.0.0.0
+这行代码告诉你的操作系统监听所有公开的 IP .
+服务器安全不被人访问和需要发布出去
+
+
+虽然 flask 命令可以方便地启动一个本地开发服务器，但是每次应用代码 修改之后都需要手动重启服务器。
+这样不是很方便， Flask 可以做得更好。如果你打开 调试模式，那么服务器会在修改应用代码之后自动重启，并且当应用出错时还会提供一个有用的调试器。
