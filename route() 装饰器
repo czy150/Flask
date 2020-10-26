@@ -1,0 +1,41 @@
+使用 route() 装饰器来把函数绑定到 URL:
+
+@app.route('/')
+def index():
+    return 'Index Page'
+
+@app.route('/hello')
+def hello():
+    return 'Hello, World'
+   
+这个装饰器的用法很多
+通过把 URL 的一部分标记为 <variable_name> 就可以在 URL 中添加变量。
+通过使用 <converter:variable_name> ，可以 选择性的加上一个转换器，为变量指定规则
+@app.route('/user/<username>')
+def show_user_profile(username):
+    # show the user profile for that user
+    return 'User %s' % escape(username)
+
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    # show the post with the given id, the id is an integer
+    return 'Post %d' % post_id
+
+@app.route('/path/<path:subpath>')
+def show_subpath(subpath):
+    # show the subpath after /path/
+    return 'Subpath %s' % escape(subpath)
+
+比如加变量的这个@app.route('/user/<username>'),括号中的参数/user/<username>就是设置的路径，也就是必须跟在原本html的URL地址后的，否则无法访问显示是
+Not Found
+The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+而标签里的username则是可以随意替换的变量
+
+可以在<converter:variable_name>就是用int、string、float、path、uuid替换converter,string和path的区别就是path包括斜杠'/'
+如果使用同路径的@app.route('/user/<username>') @app.route('/user/<int:post_id>')，符合转换器类型的函数优先级高于不用转换器的，即加载有转换器的页面，不符合转换器后再换到没有转换器的
+⬆⬆⬆⬆⬆⬆⬆⬆
+自作聪明，只有自上而下的运行，输入数字执行下面的是因为数字不能直接当变量名，所以到了第二个函数这。。。
+还是不对，用string转换器了，结果是第一个函数。。。
+先执行转换器吗
+
+
