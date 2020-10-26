@@ -1,0 +1,25 @@
+Flask 是一个微型的 Python 开发的 Web 框架，基于Werkzeug WSGI工具箱和Jinja2 模板引擎。 
+Flask使用BSD授权。
+Flask也被称为“microframework”，因为它使用简单的核心，用extension增加其他功能。
+Flask没有默认使用的数据库、窗体验证工具。
+然而，Flask保留了扩增的弹性，可以用Flask-extension加入这些功能：ORM、窗体验证工具、文件上传、各种开放式身份验证技术。
+
+@app.route('/')是一个装饰器
+用于注册给定URL规则的视图功能。就是为了显示出来吗
+
+run（host = None，port = None，debug = None，load_dotenv = True，** options ））¶
+在本地开发服务器上运行该应用程序。
+
+
+一个最小的Flask应用
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+首先我们导入了 Flask 类。 该类的实例将会成为我们的 WSGI 应用。
+接着我们创建一个该类的实例。第一个参数是应用模块或者包的名称。如果你使用 一个单一模块（就像本例），那么应当使用 __name__ ，因为名称会根据这个 模块是按应用方式使用还是作为一个模块导入而发生变化（可能是 ‘__main__’ ， 也可能是实际导入的名称）。这个参数是必需的，这样 Flask 才能知道在哪里可以 找到模板和静态文件等东西。更多内容详见 Flask 文档。
+然后我们使用 route() 装饰器来告诉 Flask 触发函数的 URL 。
+函数名称被用于生成相关联的 URL 。函数最后返回需要在用户浏览器中显示的信息。
