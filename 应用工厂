@@ -1,6 +1,6 @@
 创建 flaskr 文件夹并且文件夹内添加 __init__.py 文件。 __init__.py 有两个作用：
 一是包含应用工厂；
-二是 告诉 Python flaskr 文件夹应当视作为一个包。
+二是告诉 Python flaskr 文件夹应当视作为一个包。
 
 flaskr/__init__.py
 import os
