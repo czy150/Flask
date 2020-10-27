@@ -1,0 +1,12 @@
+from flask import request
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        return do_the_login()
+    else:
+        return show_the_login_form()
+        
+Web 应用使用不同的 HTTP 方法处理 URL 。当你使用 Flask 时，应当熟悉 HTTP 方法。 缺省情况下，一个路由只回应 GET 请求。 
+可以使用 route() 装饰器的 methods 参数来处理不同的 HTTP 方法:  
+method参数 
