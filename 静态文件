@@ -1,7 +1,28 @@
+顾名思义，静态文件就是那些不会改变的文件。
+在一般的应用程序中，静态文件包括 CSS 文件，JavaScript 文件以及图片。它们也可能是音频文件以及其它类似的东西。
+
 动态的 web 应用也需要静态文件，一般是 CSS 和 JavaScript 文件。理想情况下你的 服务器已经配置好了为你的提供静态文件的服务。
 但是在开发过程中， Flask 也能做好 这项工作。只要在你的包或模块旁边创建一个名为 static 的文件夹就行了。 
 静态文件位于应用的 /static 中。
 使用特定的 'static' 端点就可以生成相应的 URL
 url_for('static', filename='style.css')
 这个静态文件在文件系统中的位置应该是 static/style.css 。
+可以加载CSS/js/image 静态文件
 
+
+先写一个入口文件，来源于csdn，codetest中有源地址
+from flask import Flask,render_template
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/login/')
+def login():
+    return render_template('login.html')
+
+if __name__ == '__main__':
+    app.run(debug = True)
