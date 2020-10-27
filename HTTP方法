@@ -9,4 +9,4 @@ def login():
         
 Web 应用使用不同的 HTTP 方法处理 URL 。当你使用 Flask 时，应当熟悉 HTTP 方法。 缺省情况下，一个路由只回应 GET 请求。 
 可以使用 route() 装饰器的 methods 参数来处理不同的 HTTP 方法:  
-method参数 
+method参数 GET、POST、PUT、HEAD、DELETE、OPTIONS、TRACE、CONNECT
