@@ -1,0 +1,38 @@
+项目布局如下：
+
+/home/user/Projects/flask-tutorial
+├── flaskr/
+│   ├── __init__.py
+│   ├── db.py
+│   ├── schema.sql
+│   ├── auth.py
+│   ├── blog.py
+│   ├── templates/
+│   │   ├── base.html
+│   │   ├── auth/
+│   │   │   ├── login.html
+│   │   │   └── register.html
+│   │   └── blog/
+│   │       ├── create.html
+│   │       ├── index.html
+│   │       └── update.html
+│   └── static/
+│       └── style.css
+├── tests/
+│   ├── conftest.py
+│   ├── data.sql
+│   ├── test_factory.py
+│   ├── test_db.py
+│   ├── test_auth.py
+│   └── test_blog.py
+├── venv/
+├── setup.py
+└── MANIFEST.in
+
+flaskr/ ，一个包含应用代码和文件的 Python 包。
+tests/ ，一个包含测试模块的文件夹。
+venv/ ，一个 Python 虚拟环境，用于安装 Flask 和其他依赖的包。
+告诉 Python 如何安装项目的安装文件。
+版本控制配置，如 git 。不管项目大小，应当养成使用版本控制的习惯。
+项目需要的其他文件。
+
