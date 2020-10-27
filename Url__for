@@ -1,0 +1,22 @@
+来自博客园——一起来学python——公众号python学习开发
+
+一般我们通过一个URL就可以执行到某一个函数。
+如果反过来，我们知道一个函数，怎么去获得这个URL呢？
+url_for函数就可以帮我们实现这个功能。url_for()函数接收两个及以上的参数.
+他接收函数名作为第一个参数，接收对应URL规则的命名参数，如果还出现其他的参数，则会添加到URL的后面作为查询参数。
+
+通过构建URL的方式而选择直接在代码中拼URL的原因有两点：
+将来如果修改了URL，但没有修改该URL对应的函数名，就不用到处去替换URL了。
+url_for()函数会转义特殊字符和Unocode数据，这些工作都不需要我们自己处理。
+总结：如果修改了URL，输入的Web地址变了，可以通过以原本Url里包含的函数反过来查找原本的URL内容，
+
+url_for(方法的名) =app.route参数名
+而url_for（）本身和app.route的参数是没关系的，只和方法的参数名相关，得到的是一个新的路由
+
+@app.route('/user/<username>')
+def profile(username):
+    
+    return '{}\'s profile'.format(escape(username))
+也就是url_for（profile(username)）=@app.route('/user/<username>')，用函数名做参数直接导向@app.route('/user/<username>')创造的路由
+
+
