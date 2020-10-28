@@ -1,0 +1,39 @@
+Jinja 最有力的部分就是模板继承。模板继承允许你创建一个基础“骨架”模板。这 个模板中包含站点的常用元素，定义可以被子模板继承的块 。
+
+这个模板的名称是 :file:layout.html ，它定义了一个简单的 HTML 骨架，用 于显示一个简单的两栏页面。“子”模板的任务是用内容填充空的块：
+
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}{% endblock %} - My Webpage</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">
+      {% block footer %}
+      &copy; Copyright 2010 by <a href="http://domain.invalid/">you</a>.
+      {% endblock %}
+    </div>
+  </body>
+</html>
+
+
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+  <h1>Index</h1>
+  <p class="important">
+    Welcome on my awesome homepage.
+{% endblock %}
+
+看了好久懂了，就是可以再{% block content %}{% endblock %}之间填写内容，其余部分是不变的，基础骨架模板可以不带内容
+如果没有重新定义的话，则表示沿用基础模板中的区块定义
