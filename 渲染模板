@@ -1,0 +1,3 @@
+渲染模板的函数就是render_template
+把文件放在templates下面
+
