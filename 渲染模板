@@ -1,3 +1,28 @@
 渲染模板的函数就是render_template
 把文件放在templates下面
 
+你的应用是一个模块（.py),则你的templates文件夹应该在他旁边，在同一个目录下
+如果是一个包（文件夹），那么就在包里面
+
+这个例子
+hellp.py
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/age/')
+@app.route('/hello/<name>')
+def hello(name = None):
+    return render_template("hello.html",name = name)
+    
+hello.html
+<!DOCTYPE html>
+<title>Hello from Flasd</title>
+{% if name %}
+    <h1>Hello {{name}}!</h1>
+{% else %}
+    <h1>Hello,world!</h1>
+{% endif %}
+
+       
+测试以后，发现，上面的路由没有函数，和下面的路由执行相同的函数，上面没有参数输入的设置，所以默认参数为None,执行html中的else语句
