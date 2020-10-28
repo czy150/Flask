@@ -11,6 +11,7 @@ url_for('static', filename='style.css')
 
 
 先写一个入口文件，来源于csdn，codetest中有源地址
+enter.py
 from flask import Flask,render_template
 
 app = Flask(__name__)
@@ -29,5 +30,41 @@ if __name__ == '__main__':
     
 这里用到了flask的模板渲染，就是这个人render_template,需要把要渲染的文件放到templates这个文件夹中，这个模板现在是一个html文件，不知到还有没有其他类型
 入口文件就是为了能够进入到这个路径，return render_template则是打开本地的html模板，所以一开始先进入这个index.html或者加上路径/login/进入login.html
+
+接下来写index.html和login，放在template文件中
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <!--一般来说，不会把css样式写在这里，会单独卸载static文件夹，用css文件来存放所需的样式，flask默认从static中寻找-->
+    <!--再通过url_for('static',filename='文件路径')的形式引入到这里来-->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+    <script src="{{url_for('static',filename='js/index.js')}}"></script>
+</head>
+<body>
+<a href="{{ url_for('login') }}">登陆</a>  <!--意义：点击登陆后，就跳到login.html页面中了-->
+<img src="{{url_for('static',filename='image/zhiliao.png')}}" alt="">
+</body>
+</html>
+使用了静态方法url_for('static',filename='路径/文件名'),python读取到{{}}会执行里面的语句，读取static文件下的路径/文件，这个static是指定的端点，静态文件放到它里面
+
+
+login.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+这是登录的页面
+</body>
+</html>
+可以直接/login访问，也可以通过index中的url_for(方法名)来访问
+
+剩下的css，js，img自己写
+
 
 
