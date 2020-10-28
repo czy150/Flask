@@ -26,3 +26,8 @@ def login():
 
 if __name__ == '__main__':
     app.run(debug = True)
+    
+这里用到了flask的模板渲染，就是这个人render_template,需要把要渲染的文件放到templates这个文件夹中，这个模板现在是一个html文件，不知到还有没有其他类型
+入口文件就是为了能够进入到这个路径，return render_template则是打开本地的html模板，所以一开始先进入这个index.html或者加上路径/login/进入login.html
+
+
