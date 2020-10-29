@@ -1,0 +1,16 @@
+cddn Flask request属性详解
+https://blog.csdn.net/u011146423/article/details/88191225
+
+在Flask的官方文档中是这样介绍request的：对于 Web 应用，与客户端发送给服务器的数据交互至关重要。在 Flask 中由全局的 request 对象来提供这些信息。
+
+从Flask模块导入request：from flask import request
+
+form 	一个从POST和PUT请求解析的 MultiDict（一键多值字典）。
+args	MultiDict，要操作 URL （如 ?key=value ）中提交的参数可以使用 args 属性:searchword = request.args.get('key', '')
+values 	CombinedMultiDict，内容是form和args。 
+常用，可以使用values替代form和args。
+
+常用
+headers 	请求头，字典类型。
+data 	包含了请求的数据，并转换为字符串，除非是一个Flask无法处理的mimetype。
+method	请求方法，比如POST、GET。
