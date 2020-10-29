@@ -1,4 +1,4 @@
-cddn Flask request属性详解
+csdn Flask request属性详解
 https://blog.csdn.net/u011146423/article/details/88191225
 
 在Flask的官方文档中是这样介绍request的：对于 Web 应用，与客户端发送给服务器的数据交互至关重要。在 Flask 中由全局的 request 对象来提供这些信息。
@@ -14,3 +14,11 @@ values 	CombinedMultiDict，内容是form和args。
 headers 	请求头，字典类型。
 data 	包含了请求的数据，并转换为字符串，除非是一个Flask无法处理的mimetype。
 method	请求方法，比如POST、GET。
+
+form：返回form的内容
+method：请求的方法
+args和values：args返回请求中的参数，values返回请求中的参数和form
+cookies：cookies信息
+headers：请求headers信息，返回的结果是个list
+url、path、script_root、base_url、url_root：看结果比较直观
+date、files：date是请求的数据，files随请求上传的文件
