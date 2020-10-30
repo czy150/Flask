@@ -1,0 +1,41 @@
+来自官方文档https://dormousehole.readthedocs.io/en/latest/testing.html的一部分内容
+
+测试骨架
+首先我们在应用的根文件夹中添加一个测试文件夹。然后创建一个 Python 文件来储 存测试内容（ test_flaskr.py ）。名称类似 test_*.py 的文件会被 pytest 自动发现。
+接着，我们创建一个名为 client() 的 pytest 固件 ，用来配置调试应用 并初始化一个新的数据库:
+import os
+import tempfile
+
+import pytest
+
+from flaskr import flaskr
+
+
+@pytest.fixture
+def client():
+    db_fd, flaskr.app.config['DATABASE'] = tempfile.mkstemp()
+    flaskr.app.config['TESTING'] = True
+
+    with flaskr.app.test_client() as client:
+        with flaskr.app.app_context():
+            flaskr.init_db()
+        yield client
+
+    os.close(db_fd)
+    os.unlink(flaskr.app.config['DATABASE'])
+这个客户端固件会被每个独立的测试调用。它提供了一个简单的应用接口，用于向应 用发送请求，还可以为我们追踪 cookie 。
+就是提供一个客户端，模拟浏览器发出请求。。
+
+现在开始测试应用的功能。当我们访问应用的根 URL （ / ）时应该显示 “ No entries here so far ”。在 test_flaskr.py 文件中新增一个测试 函数来测试这个功能:
+def test_empty_db(client):
+    """Start with a blank database."""
+
+    rv = client.get('/')
+    assert b'No entries here so far' in rv.data
+注意，我们的调试函数都是以 test 开头的。这样 pytest 就会自动识别这些是 用于测试的函数并运行它们。
+
+通过使用 client.get ，可以向应用的指定 URL 发送 HTTP GET 请求，其返 回的是一个 response_class 对象。我们可以使用 data 属性来检查应用的返回值（字符串 类型）。
+在本例中，我们检查输出是否包含 'No entries here so far' 。
+
+
+
